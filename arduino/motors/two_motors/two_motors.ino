@@ -8,6 +8,8 @@ int L293D_4A = 8;
 
 void setup()
 {
+  Serial.begin(9600);
+
   pinMode(enablePin1, OUTPUT);
   pinMode(L293D_1A, OUTPUT);
   pinMode(L293D_2A, OUTPUT);
@@ -15,9 +17,6 @@ void setup()
   pinMode(enablePin2, OUTPUT);
   pinMode(L293D_3A, OUTPUT);
   pinMode(L293D_4A, OUTPUT);
-
-  analogWrite(enablePin1, 200);
-  analogWrite(enablePin2, 200);
 
   // Counter Clockwise left motor
   digitalWrite(L293D_1A, HIGH);
@@ -28,4 +27,13 @@ void setup()
   digitalWrite(L293D_4A, HIGH);
 }
 
-void loop() {}
+void loop() 
+{
+  Serial.println("Start");
+  analogWrite(enablePin1, 200);
+  analogWrite(enablePin2, 200);
+
+  Serial.println("Stop");
+  analogWrite(enablePin1, 0);
+  analogWrite(enablePin2, 0);
+}
