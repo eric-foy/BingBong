@@ -33,7 +33,11 @@ void loop()
   analogWrite(enablePin1, 200);
   analogWrite(enablePin2, 200);
 
+  delay(8000);
+
   Serial.println("Stop");
   analogWrite(enablePin1, 0);
   analogWrite(enablePin2, 0);
+
+  delay(8000);
 }
