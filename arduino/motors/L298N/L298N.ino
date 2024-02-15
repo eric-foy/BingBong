@@ -19,7 +19,7 @@ int L298N_2_4A = 13;
 
 void setup()
 {
-  Serial.begin(9600);
+  //Serial.begin(9600);
 
   // ---------------------------------------------------
   // Right Motors
@@ -33,6 +33,24 @@ void setup()
   pinMode(L298N_3A, OUTPUT);
   pinMode(L298N_4A, OUTPUT);
 
+  // ---------------------------------------------------
+  // Left Motors
+  // ---------------------------------------------------
+
+  pinMode(L298N_2_1A, OUTPUT);
+  pinMode(L298N_2_2A, OUTPUT);
+
+  //pinMode(enablePin2, OUTPUT);
+  pinMode(L298N_2_3A, OUTPUT);
+  pinMode(L298N_2_4A, OUTPUT);
+}
+
+void forward(int delayMilli)
+{
+  // ---------------------------------------------------
+  // Right Motors
+  // ---------------------------------------------------
+
   // Counter Clockwise left motor
   digitalWrite(L298N_1A, HIGH);
   digitalWrite(L298N_2A, LOW);
@@ -45,13 +63,6 @@ void setup()
   // Left Motors
   // ---------------------------------------------------
 
-  pinMode(L298N_2_1A, OUTPUT);
-  pinMode(L298N_2_2A, OUTPUT);
-
-  //pinMode(enablePin2, OUTPUT);
-  pinMode(L298N_2_3A, OUTPUT);
-  pinMode(L298N_2_4A, OUTPUT);
-
   // Counter Clockwise left motor
   digitalWrite(L298N_2_1A, LOW);
   digitalWrite(L298N_2_2A, HIGH);
@@ -59,21 +70,41 @@ void setup()
   // Clockwise right motor
   digitalWrite(L298N_2_3A, HIGH);
   digitalWrite(L298N_2_4A, LOW);
+
+  delay(delayMilli);
+}
+
+void backward(int delayMilli)
+{
+  // ---------------------------------------------------
+  // Right Motors
+  // ---------------------------------------------------
+
+  // Counter Clockwise left motor
+  digitalWrite(L298N_1A, LOW);
+  digitalWrite(L298N_2A, HIGH);
+
+  // Clockwise right motor
+  digitalWrite(L298N_3A, HIGH);
+  digitalWrite(L298N_4A, LOW);
+
+  // ---------------------------------------------------
+  // Left Motors
+  // ---------------------------------------------------
+
+  // Counter Clockwise left motor
+  digitalWrite(L298N_2_1A, HIGH);
+  digitalWrite(L298N_2_2A, LOW);
+
+  // Clockwise right motor
+  digitalWrite(L298N_2_3A, LOW);
+  digitalWrite(L298N_2_4A, HIGH);
+
+  delay(delayMilli);
 }
 
 void loop() 
 {
-  /*
-  Serial.println("Start");
-  analogWrite(enablePin1, 200);
-  analogWrite(enablePin2, 200);
-
-  delay(8000);
-
-  Serial.println("Stop");
-  analogWrite(enablePin1, 0);
-  analogWrite(enablePin2, 0);
-
-  delay(8000);
-  */
+  forward(2000);
+  backward(2000);
 }
