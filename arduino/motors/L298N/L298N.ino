@@ -53,12 +53,12 @@ void setup()
   pinMode(L298N_2_4A, OUTPUT);
 
   // Counter Clockwise left motor
-  digitalWrite(L298N_2_1A, HIGH);
-  digitalWrite(L298N_2_2A, LOW);
+  digitalWrite(L298N_2_1A, LOW);
+  digitalWrite(L298N_2_2A, HIGH);
 
   // Clockwise right motor
-  digitalWrite(L298N_2_3A, LOW);
-  digitalWrite(L298N_2_4A, HIGH);
+  digitalWrite(L298N_2_3A, HIGH);
+  digitalWrite(L298N_2_4A, LOW);
 }
 
 void loop() 
