@@ -30,8 +30,8 @@ void setup()
 void loop() 
 {
   Serial.println("Start");
-  analogWrite(enablePin1, 200);
-  analogWrite(enablePin2, 200);
+  analogWrite(enablePin1, 255);
+  analogWrite(enablePin2, 255);
 
   delay(8000);
 
@@ -39,5 +39,5 @@ void loop()
   analogWrite(enablePin1, 0);
   analogWrite(enablePin2, 0);
 
-  delay(8000);
+  delay(4000);
 }
