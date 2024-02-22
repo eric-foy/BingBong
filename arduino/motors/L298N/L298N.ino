@@ -43,6 +43,42 @@ void setup()
   //pinMode(enablePin2, OUTPUT);
   pinMode(L298N_2_3A, OUTPUT);
   pinMode(L298N_2_4A, OUTPUT);
+
+  // ---------------------------------------------------
+  // Main
+  // ---------------------------------------------------
+
+  forward(500);
+  spinLeft(500);
+  forward(500);
+  stop();
+}
+
+void stop()
+{
+  // ---------------------------------------------------
+  // Right Motors
+  // ---------------------------------------------------
+
+  // Counter Clockwise left motor
+  digitalWrite(L298N_1A, LOW);
+  digitalWrite(L298N_2A, LOW);
+
+  // Clockwise right motor
+  digitalWrite(L298N_3A, LOW);
+  digitalWrite(L298N_4A, LOW);
+
+  // ---------------------------------------------------
+  // Left Motors
+  // ---------------------------------------------------
+
+  // Counter Clockwise left motor
+  digitalWrite(L298N_2_1A, LOW);
+  digitalWrite(L298N_2_2A, LOW);
+
+  // Clockwise right motor
+  digitalWrite(L298N_2_3A, LOW);
+  digitalWrite(L298N_2_4A, LOW);
 }
 
 void forward(int delayMilli)
@@ -103,8 +139,66 @@ void backward(int delayMilli)
   delay(delayMilli);
 }
 
+void spinRight(int delayMilli)
+{
+  // ---------------------------------------------------
+  // Right Motors
+  // ---------------------------------------------------
+
+  // Counter Clockwise left motor
+  digitalWrite(L298N_1A, HIGH);
+  digitalWrite(L298N_2A, LOW);
+
+  // Clockwise right motor
+  digitalWrite(L298N_3A, LOW);
+  digitalWrite(L298N_4A, HIGH);
+
+  // ---------------------------------------------------
+  // Left Motors
+  // ---------------------------------------------------
+
+  // Counter Clockwise left motor
+  digitalWrite(L298N_2_1A, HIGH);
+  digitalWrite(L298N_2_2A, LOW);
+
+  // Clockwise right motor
+  digitalWrite(L298N_2_3A, LOW);
+  digitalWrite(L298N_2_4A, HIGH);
+
+  delay(delayMilli);
+}
+
+void spinLeft(int delayMilli)
+{
+  // ---------------------------------------------------
+  // Right Motors
+  // ---------------------------------------------------
+
+  // Counter Clockwise left motor
+  digitalWrite(L298N_1A, LOW);
+  digitalWrite(L298N_2A, HIGH);
+
+  // Clockwise right motor
+  digitalWrite(L298N_3A, HIGH);
+  digitalWrite(L298N_4A, LOW);
+
+  // ---------------------------------------------------
+  // Left Motors
+  // ---------------------------------------------------
+
+  // Counter Clockwise left motor
+  digitalWrite(L298N_2_1A, LOW);
+  digitalWrite(L298N_2_2A, HIGH);
+
+  // Clockwise right motor
+  digitalWrite(L298N_2_3A, HIGH);
+  digitalWrite(L298N_2_4A, LOW);
+
+  delay(delayMilli);
+}
+
 void loop() 
 {
-  forward(2000);
-  backward(2000);
+  //forward(2000);
+  //backward(2000);
 }
