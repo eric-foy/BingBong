@@ -1,6 +1,3 @@
-// Using enable jumper right now so no need for enable pins. Max speed at 5V with jumper
-
-
 // Right Motors
 int enablePin1 = 3;
 int L298N_1A = 2;
@@ -17,7 +14,7 @@ int enablePin4 = 11;
 int L298N_2_3A = 12;
 int L298N_2_4A = 13;
 
-void setup()
+void setupL298N()
 {
   //Serial.begin(9600);
 
@@ -44,15 +41,6 @@ void setup()
   pinMode(enablePin4, OUTPUT);
   pinMode(L298N_2_3A, OUTPUT);
   pinMode(L298N_2_4A, OUTPUT);
-
-  // ---------------------------------------------------
-  // Main
-  // ---------------------------------------------------
-
-  forward(1200, 200);
-  spinLeft(600, 200);
-  forward(1200, 200);
-  stop();
 }
 
 void stop()
@@ -240,8 +228,10 @@ void turn(int duration, int speedLeft, int speedRight)
   delay(duration);
 }
 
-void loop() 
-{
-  //forward(2000);
-  //backward(2000);
-}
+extern void setupL298N();
+extern void stop();
+extern void forward();
+extern void backward();
+extern void spinRight();
+extern void spinLeft();
+extern void turn();
