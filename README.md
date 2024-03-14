@@ -4,3 +4,6 @@ Bing Bong is a garbage bin device that follows a person and helps the user hold 
 ## Setting up github
     git remote add origin git@github.com:eric-foy/BingBong.git
     git checkout -b yourname
+    
+## Setting up tflite model
+    https://github.com/EdjeElectronics/TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi/blob/master/deploy_guides/Raspberry_Pi_Guide.md
