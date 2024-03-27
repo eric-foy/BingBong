@@ -14,3 +14,5 @@ https://github.com/DreadSirius/BingBongApp
     That guide did not work for me with the 16MP camera. I am now using this one and have modified it in our repo to only detect people.
     https://www.youtube.com/watch?v=3YqbO2AlepM
     https://github.com/freedomwebtech/tflite-custom-object-bookworm
+
+    Run python detect1.py
