@@ -7,3 +7,7 @@ Bing Bong is a garbage bin device that follows a person and helps the user hold 
     
 ## Setting up tflite model
     https://github.com/EdjeElectronics/TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi/blob/master/deploy_guides/Raspberry_Pi_Guide.md
+
+    That guide did not work for me with the 16MP camera. I am now using this one and have modified it in our repo to only detect people.
+    https://www.youtube.com/watch?v=3YqbO2AlepM
+    https://github.com/freedomwebtech/tflite-custom-object-bookworm
