@@ -32,7 +32,7 @@ picam2.configure("preview")
 picam2.start()
 
 def run(model: str, max_results: int, score_threshold: float, 
-        camera_id: int, width: int, height: int) -> None:
+        camera_id: int, width: int, height: int, do_window: bool) -> str:
   """Continuously run inference on images acquired from the camera.
 
   Args:
@@ -92,6 +92,7 @@ def run(model: str, max_results: int, score_threshold: float,
     mp_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb_image)
 
     # Run object detection using the model.
+    # TODO run slower
     detector.detect_async(mp_image, time.time_ns() // 1_000_000)
 
     # Show the FPS
@@ -130,6 +131,7 @@ def run(model: str, max_results: int, score_threshold: float,
             person_width = detected_person.bounding_box.width
             person_height = detected_person.bounding_box.height
             center_width = WIDTH / 3
+            ## TODO do majority voting for the last 5 detections of left, right, or center
             if (origin_x + person_width/2 > WIDTH/2 + center_width/2):
                 print("right")
             elif (origin_x + person_width/2 < WIDTH/2 - center_width/2):
@@ -138,13 +140,16 @@ def run(model: str, max_results: int, score_threshold: float,
                 print("center")
         #############################################################
         
-        current_frame = visualize(current_frame, detection_result_list[0])
-        detection_frame = current_frame
+        if (do_window):
+            current_frame = visualize(current_frame, detection_result_list[0])
+            detection_frame = current_frame
+
         detection_result_list.clear()
 
-    if detection_frame is not None:
-        cv2.imshow('object_detection', detection_frame)
-        pass
+    if (do_window):
+        if detection_frame is not None:
+            cv2.imshow('object_detection', detection_frame)
+            pass
 
     # Stop the program if the ESC key is pressed.
     if cv2.waitKey(1) == 27:
@@ -168,7 +173,8 @@ def main():
       '--maxResults',
       help='Max number of detection results.',
       required=False,
-      default=5)
+      default=1)
+#      default=5)
   parser.add_argument(
       '--scoreThreshold',
       help='The score threshold of detection results.',
@@ -202,8 +208,12 @@ def main():
   args = parser.parse_args()
 
   run(args.model, int(args.maxResults),
-      args.scoreThreshold, int(args.cameraId), args.frameWidth, args.frameHeight)
+      args.scoreThreshold, int(args.cameraId), args.frameWidth, args.frameHeight, True)
+
+def detect_person(do_window=True):
+    run("efficientdet_lite0.tflite", 1, 0.25, 0, WIDTH, HEIGHT, do_window)
 
 
 if __name__ == '__main__':
-  main()
+  #main()
+  detect_person(do_window=True)
