@@ -129,11 +129,13 @@ def run(model: str, max_results: int, score_threshold: float,
             origin_y = detected_person.bounding_box.origin_y
             person_width = detected_person.bounding_box.width
             person_height = detected_person.bounding_box.height
-            if (origin_x + person_width/2 > WIDTH/2):
+            center_width = WIDTH / 3
+            if (origin_x + person_width/2 > WIDTH/2 + center_width/2):
                 print("right")
-            else:
+            elif (origin_x + person_width/2 < WIDTH/2 - center_width/2):
                 print("left")
-            #TODO add center zone
+            else:
+                print("center")
         #############################################################
         
         current_frame = visualize(current_frame, detection_result_list[0])
