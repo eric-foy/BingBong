@@ -1,6 +1,7 @@
 import argparse
 import sys
 import time
+import serial
 
 import cv2
 import mediapipe as mp
@@ -32,7 +33,7 @@ picam2.configure("preview")
 picam2.start()
 
 def run(model: str, max_results: int, score_threshold: float, 
-        camera_id: int, width: int, height: int, do_window: bool) -> str:
+        camera_id: int, width: int, height: int, do_window: bool, do_serial: bool) -> None:
   """Continuously run inference on images acquired from the camera.
 
   Args:
@@ -44,7 +45,10 @@ def run(model: str, max_results: int, score_threshold: float,
     height: The height of the frame captured from the camera.
   """
 
-
+  ser = None
+  if (do_serial):
+    ser = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
+    ser.reset_input_buffer()
 
   # Visualization parameters
   row_size = 50  # pixels
@@ -133,11 +137,26 @@ def run(model: str, max_results: int, score_threshold: float,
             center_width = WIDTH / 3
             ## TODO do majority voting for the last 5 detections of left, right, or center
             if (origin_x + person_width/2 > WIDTH/2 + center_width/2):
-                print("right")
+                if (do_serial):
+                    ser.write(b"right\n")
+                    line = ser.readline().decode('utf-8').rstrip()
+                    print(line)
+                else:
+                    print("right")
             elif (origin_x + person_width/2 < WIDTH/2 - center_width/2):
-                print("left")
+                if (do_serial):
+                    ser.write(b"left\n")
+                    line = ser.readline().decode('utf-8').rstrip()
+                    print(line)
+                else:
+                    print("left")
             else:
-                print("center")
+                if (do_serial):
+                    ser.write(b"center\n")
+                    line = ser.readline().decode('utf-8').rstrip()
+                    print(line)
+                else:
+                    print("center")
         #############################################################
         
         if (do_window):
@@ -208,12 +227,12 @@ def main():
   args = parser.parse_args()
 
   run(args.model, int(args.maxResults),
-      args.scoreThreshold, int(args.cameraId), args.frameWidth, args.frameHeight, True)
+      args.scoreThreshold, int(args.cameraId), args.frameWidth, args.frameHeight, True, False)
 
-def detect_person(do_window=True):
-    run("efficientdet_lite0.tflite", 1, 0.25, 0, WIDTH, HEIGHT, do_window)
+def detect_person(do_window=True, do_serial=True):
+    run("efficientdet_lite0.tflite", 1, 0.25, 0, WIDTH, HEIGHT, do_window, do_serial)
 
 
 if __name__ == '__main__':
   #main()
-  detect_person(do_window=True)
+  detect_person()
