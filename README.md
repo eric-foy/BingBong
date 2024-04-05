@@ -15,4 +15,4 @@ https://github.com/DreadSirius/BingBongApp
     https://www.youtube.com/watch?v=3YqbO2AlepM
     https://github.com/freedomwebtech/tflite-custom-object-bookworm
 
-    Run python detect1.py
+    Run 'DISPLAY=:0 python detect1.py'
