@@ -16,3 +16,9 @@ https://github.com/DreadSirius/BingBongApp
     https://github.com/freedomwebtech/tflite-custom-object-bookworm
 
     Run 'DISPLAY=:0 python detect_person.py'
+
+## Fan
+100% fan speed
+    pinctrl FAN_PWM op dl
+Let the firmware automatically control the fan again
+    pinctrl FAN_PWM a0
