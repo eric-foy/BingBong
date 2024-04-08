@@ -1,0 +1,16 @@
+[connection]
+id=androidAP
+type=wifi
+[wifi]
+mode=infrastructure
+ssid=AndroidAP_4265
+hidden=false
+[ipv4]
+method=manual
+address1=192.168.13.111
+[ipv6]
+method=ignore
+[proxy]
+[wifi-security]
+key-mgmt=wpa-psk
+psk=Di2B5ZmU
