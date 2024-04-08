@@ -4,6 +4,9 @@ Bing Bong is a garbage bin device that follows a person and helps the user hold 
 ## Android app
 https://github.com/DreadSirius/BingBongApp
 
+start server with
+    ncat -l 50505
+
 ## Setting up github
     git remote add origin git@github.com:eric-foy/BingBong.git
     git checkout -b yourname
