@@ -47,8 +47,19 @@ def run(model: str, max_results: int, score_threshold: float,
 
   ser = None
   if (do_serial):
-    ser = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
+    ser = serial.Serial('/dev/ttyACM0', 9600, timeout=15)
     ser.reset_input_buffer()
+
+    syncArduino = False
+    while (syncArduino == False):
+        ser.write(b"syncPi\n")
+        ser.flush()
+        line = ser.readline().decode('utf-8').rstrip()
+        print(line)
+        #time.sleep(2)
+        if (line == "syncArduino"):
+            #print("yes")
+            syncArduino = True
 
   # Visualization parameters
   row_size = 50  # pixels
