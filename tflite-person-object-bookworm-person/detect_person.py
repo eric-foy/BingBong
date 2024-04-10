@@ -47,7 +47,7 @@ def run(model: str, max_results: int, score_threshold: float,
 
   ser = None
   if (do_serial):
-    ser = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
+    ser = serial.Serial('/dev/ttyACM0', 9600, timeout=5)
     ser.reset_input_buffer()
 
   # Visualization parameters
@@ -138,21 +138,36 @@ def run(model: str, max_results: int, score_threshold: float,
             ## TODO do majority voting for the last 5 detections of left, right, or center
             if (origin_x + person_width/2 > WIDTH/2 + center_width/2):
                 if (do_serial):
+                    print("right")
+                    #ser.reset_output_buffer()
+                    #ser.reset_input_buffer()
                     ser.write(b"right\n")
+                    ser.flush()
+                    #time.sleep(2)
                     line = ser.readline().decode('utf-8').rstrip()
                     print(line)
                 else:
                     print("right")
             elif (origin_x + person_width/2 < WIDTH/2 - center_width/2):
                 if (do_serial):
+                    print("left")
+                    #ser.reset_output_buffer()
+                    #ser.reset_input_buffer()
                     ser.write(b"left\n")
+                    ser.flush()
+                    #time.sleep(2)
                     line = ser.readline().decode('utf-8').rstrip()
                     print(line)
                 else:
                     print("left")
             else:
                 if (do_serial):
+                    print("center")
+                    #ser.reset_output_buffer()
+                    #ser.reset_input_buffer()
                     ser.write(b"center\n")
+                    #time.sleep(2)
+                    ser.flush()
                     line = ser.readline().decode('utf-8').rstrip()
                     print(line)
                 else:
@@ -235,4 +250,4 @@ def detect_person(do_window=True, do_serial=True):
 
 if __name__ == '__main__':
   #main()
-  detect_person()
+  detect_person(True, True)
