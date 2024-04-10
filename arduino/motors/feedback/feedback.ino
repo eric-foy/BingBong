@@ -14,6 +14,8 @@ int enablePin4 = 11;
 int L298N_2_3A = 12;
 int L298N_2_4A = 13;
 
+bool syncPi = false;
+
 void setup() {
   Serial.begin(9600);
 
@@ -162,6 +164,8 @@ void forward(int duration, int speed)
   delay(duration);
 }
 
+void(* resetFunc) (void) = 0;
+
 void loop() {
   /*
   spinLeft(50000, 255);
@@ -172,10 +176,36 @@ void loop() {
   }
   */
   
+  //Serial.setTimeout(5000);
+
+  /*
+  Do some intial sync.
+  Raspi sends "syncPi"
+  if we read "syncPi" then continue, else reset
+  */
+
 
   if (Serial.available() > 0) {
     String data = Serial.readStringUntil('\n');
     //String data = Serial.readString();
+
+    if (syncPi == false)
+    {
+      if (data == "syncPi")
+      {
+        syncPi = true;
+        Serial.println("syncArduino");
+        Serial.flush();
+        return;
+      }
+      else
+      {
+        Serial.println("syncFail");
+        Serial.flush();
+        delay(2000);
+        resetFunc();
+      }
+    }
 
     if (data == "center")
     {
