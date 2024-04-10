@@ -4,6 +4,9 @@ Bing Bong is a garbage bin device that follows a person and helps the user hold 
 ## Android app
 https://github.com/DreadSirius/BingBongApp
 
+start server with
+    ncat -l 50505
+
 ## Setting up github
     git remote add origin git@github.com:eric-foy/BingBong.git
     git checkout -b yourname
@@ -16,3 +19,9 @@ https://github.com/DreadSirius/BingBongApp
     https://github.com/freedomwebtech/tflite-custom-object-bookworm
 
     Run 'DISPLAY=:0 python detect_person.py'
+
+## Fan
+100% fan speed
+    pinctrl FAN_PWM op dl
+Let the firmware automatically control the fan again
+    pinctrl FAN_PWM a0
