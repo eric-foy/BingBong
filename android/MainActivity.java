@@ -48,8 +48,7 @@ public class MainActivity extends AppCompatActivity {
             Socket socket = new Socket("192.168.1.145", 50505);
 
             PrintStream printer = new PrintStream(socket.getOutputStream(), true);
-            printer.write("Hello from android\n".getBytes());
-            //Thread.sleep(50000L);
+            printer.write("take out trash\n".getBytes());
             printer.close();
 
             socket.close();
@@ -62,6 +61,17 @@ public class MainActivity extends AppCompatActivity {
     public void followMe(View view){
         if(aSwitch.isChecked()){
             textView.setText("Following!");
+			
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+
+            Socket socket = new Socket("192.168.1.145", 50505);
+
+            PrintStream printer = new PrintStream(socket.getOutputStream(), true);
+            printer.write("follow\n".getBytes());
+            printer.close();
+
+            socket.close();
         } else {
             textView.setText("Please turn on Power First!");
         }
@@ -70,6 +80,17 @@ public class MainActivity extends AppCompatActivity {
     public void Idle(View view){
         if(aSwitch.isChecked()){
             textView.setText("Idling!");
+			
+			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+
+            Socket socket = new Socket("192.168.1.145", 50505);
+
+            PrintStream printer = new PrintStream(socket.getOutputStream(), true);
+            printer.write("turn off\n".getBytes());
+            printer.close();
+
+            socket.close();
         } else {
             textView.setText("Please turn on Power First!");
         }
