@@ -1,6 +1,8 @@
 ## BingBong
 Bing Bong is a garbage bin device that follows a person and helps the user hold garbage. Bing Bong is activated through an Android app. When the trash inside Bing Bong hits a certain weight or overflows, Bing Bong dumps the trash into the trash can and returns to its docking station.
 
+[![Showcase Video for Team Projects CEG-4981](https://img.youtube.com/vi/WhgFKZH5iTs/0.jpg)](https://www.youtube.com/watch?v=WhgFKZH5iTs)
+
 ## Android app
 https://github.com/DreadSirius/BingBongApp
 
